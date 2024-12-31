@@ -1,3 +1,5 @@
+import { CustomError } from '../../../errors/custom.error'
+
 class LeadsService {
   private leadsRepository: any
 
@@ -13,8 +15,14 @@ class LeadsService {
     return this.leadsRepository.findAllLeads()
   }
 
-  getLeadById(id: string) {
-    return this.leadsRepository.findLeadById(id)
+  async getLeadById(id: string) {
+    const result = await this.leadsRepository.findLeadById(id)
+
+    if (!result) {
+      throw CustomError.notFound('Lead not found')
+    }
+
+    return result
   }
 
   updateLead(id: string, leadData: any) {

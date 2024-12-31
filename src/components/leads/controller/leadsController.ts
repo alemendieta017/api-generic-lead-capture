@@ -1,15 +1,19 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import LeadsService from '../services/leadsService'
-import LeadsRepository from '../repository/leadsRepository'
+import LeadsRepository from '../repository/firestoreRepository'
 
 const leadsRepository = new LeadsRepository()
 const leadsService = new LeadsService(leadsRepository)
 
 class LeadsController {
-  async createLead(req: Request, res: Response) {
-    const leadData = req.body
-    const lead = await leadsService.createLead(leadData)
-    res.status(201).json(lead)
+  async createLead(req: Request, res: Response, next: NextFunction) {
+    try {
+      const leadData = req.body
+      const lead = await leadsService.createLead(leadData)
+      res.status(201).json(lead)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getLeads(req: Request, res: Response) {
@@ -17,10 +21,14 @@ class LeadsController {
     res.status(200).json(leads)
   }
 
-  async getLeadById(req: Request, res: Response) {
-    const { id } = req.params
-    const lead = await leadsService.getLeadById(id)
-    res.status(200).json(lead)
+  async getLeadById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params
+      const lead = await leadsService.getLeadById(id)
+      res.status(200).json(lead)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async updateLead(req: Request, res: Response) {
