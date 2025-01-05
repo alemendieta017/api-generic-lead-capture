@@ -22,6 +22,7 @@ router.get(
   new ValidatorMiddleware(getLeadsQuerySchema, 'query').handle,
   leadsController.getLeads
 )
+router.get('/count', leadsController.countLeads)
 router.get(
   '/:id',
   new ValidatorMiddleware(getLeadSchema, 'params').handle,
@@ -37,7 +38,5 @@ router.delete(
   new ValidatorMiddleware(deleteLeadSchema, 'params').handle,
   leadsController.deleteLead
 )
-
-router.get('/count', leadsController.countLeads)
 
 export default router
