@@ -1,18 +1,20 @@
 import { CustomError } from '../../../errors/custom.error'
+import MongoRepository from '../repository/mongoRepository'
+import { ILead, findAllLeadsQuery } from '../interfaces/lead.interface'
 
 class LeadsService {
-  private leadsRepository: any
+  private leadsRepository: MongoRepository
 
-  constructor(leadsRepository: any) {
+  constructor(leadsRepository: MongoRepository) {
     this.leadsRepository = leadsRepository
   }
 
-  createLead(leadData: any) {
+  createLead(leadData: ILead) {
     return this.leadsRepository.saveLead(leadData)
   }
 
-  getLeads() {
-    return this.leadsRepository.findAllLeads()
+  getLeads(query: findAllLeadsQuery) {
+    return this.leadsRepository.findAllLeads(query)
   }
 
   async getLeadById(id: string) {
@@ -25,12 +27,16 @@ class LeadsService {
     return result
   }
 
-  updateLead(id: string, leadData: any) {
+  updateLead(id: string, leadData: ILead) {
     return this.leadsRepository.updateLead(id, leadData)
   }
 
   deleteLead(id: string) {
     return this.leadsRepository.deleteLead(id)
+  }
+
+  countLeads() {
+    return this.leadsRepository.countLeads()
   }
 }
 

@@ -1,8 +1,14 @@
-import { NextFunction, Request, Response } from 'express'
+import { NextFunction, Request, Response, ErrorRequestHandler } from 'express'
 import { CustomError } from '../errors/custom.error'
 
 export class ErrorMiddleware {
-  handle(error: any, req: Request, res: Response, next: NextFunction) {
+  handle: ErrorRequestHandler = (
+    error: Error | CustomError,
+    req: Request,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    next: NextFunction
+  ) => {
     if (error instanceof CustomError) {
       res.status(error.statusCode).json({ message: error.message })
       return
