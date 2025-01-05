@@ -16,7 +16,7 @@ class ValidatorMiddleware {
     const data = req[this.property]
     const { error } = this.schema.validate(data, {
       abortEarly: false,
-      convert: true,
+      convert: true
     })
     if (error) {
       const details = error.details.map((e) => e.message)

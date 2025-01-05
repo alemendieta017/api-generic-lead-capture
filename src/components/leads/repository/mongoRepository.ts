@@ -1,5 +1,5 @@
 import Lead from '../models/leadModel'
-import {ILead, findAllLeadsQuery} from '../interfaces/lead.interface'
+import { ILead, findAllLeadsQuery } from '../interfaces/lead.interface'
 import { FilterQuery } from 'mongoose'
 
 class MongoRepository {

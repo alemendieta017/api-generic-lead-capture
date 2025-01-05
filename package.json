@@ -6,20 +6,38 @@
     "dev": "nodemon src/index.ts",
     "start": "node dist/src/index.js",
     "build": "rimraf dist && tsc",
-    "lint": "eslint src/**/*.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require ts-node/register src/**/*.spec.ts",
+    "format": "prettier --write .",
+    "lint": "eslint . ",
+    "lint:fix": "eslint . --fix "
   },
   "dependencies": {
     "@google-cloud/firestore": "^7.11.0",
+    "@types/mongoose": "^5.11.96",
     "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "mongoose": "^8.9.3",
     "morgan": "~1.9.1",
     "nodemon": "^3.1.9"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/chai": "^5.0.1",
     "@types/express": "^5.0.0",
+    "@types/mocha": "^10.0.10",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.10.2",
+    "@types/sinon": "^17.0.3",
+    "@types/sinon-chai": "^4.0.0",
+    "chai": "^5.1.2",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "mocha": "^11.0.1",
+    "prettier": "^3.4.2",
+    "sinon": "^19.0.2",
+    "sinon-chai": "^4.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.0"
   }
 }

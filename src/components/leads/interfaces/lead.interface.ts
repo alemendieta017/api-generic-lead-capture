@@ -1,20 +1,17 @@
 interface ILead {
-  email: string,
-  firstName: string,
-  lastName: string,
-  phone: string,
+  email: string
+  firstName: string
+  lastName: string
+  phone: string
   createdAt: Date
 }
 
 interface findAllLeadsQuery {
-  email?: string;
-  dateFrom?: string;
-  dateTo?: string;
-  offset?: number;
-  limit?: number;
+  email?: string
+  dateFrom?: string
+  dateTo?: string
+  offset?: number
+  limit?: number
 }
 
-export {
-  ILead,
-  findAllLeadsQuery
-}
+export { ILead, findAllLeadsQuery }

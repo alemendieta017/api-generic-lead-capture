@@ -6,7 +6,7 @@ import {
   updateLeadSchema,
   getLeadsQuerySchema,
   getLeadSchema,
-  deleteLeadSchema,
+  deleteLeadSchema
 } from '../components/schemas/leads.schema'
 
 const router = Router()
