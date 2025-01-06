@@ -7,8 +7,9 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "sourceMap": true
+    "sourceMap": true,
   },
   "include": ["src/**/*.ts", "src/index.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "files": ["global.d.ts"]
 }

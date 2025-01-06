@@ -6,6 +6,16 @@ const userRepository = new MongoRepository()
 const userService = new UserService(userRepository)
 
 class UserController {
+  async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email, password } = req.body
+      const token = await userService.login(email, password)
+      res.status(200).json(token)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   async createUser(req: Request, res: Response, next: NextFunction) {
     try {
       const userData = req.body

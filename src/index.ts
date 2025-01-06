@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express, { Request, Response } from 'express'
 import logger from 'morgan'
 import leadsRouter from './routes/leads.router'
 import usersRouter from './routes/users.router'
@@ -22,10 +22,9 @@ app.get('/healthz', (req, res) => {
   res.send('OK')
 })
 
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, res: Response) => {
   const error = new Error('Not Found')
-  res.status(404)
-  next(error)
+  res.status(404).json({ message: error.message })
 })
 
 app.use(errorMiddleware)
