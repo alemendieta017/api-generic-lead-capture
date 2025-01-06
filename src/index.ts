@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 import logger from 'morgan'
 import leadsRouter from './routes/leads.router'
+import usersRouter from './routes/users.router'
 import { ErrorMiddleware } from './middlewares/error.middleware'
 import connectDB from './config/db'
 import config from './config/config'
@@ -16,6 +17,7 @@ app.use(logger('dev'))
 app.use(express.json())
 
 app.use('/leads', leadsRouter)
+app.use('/users', usersRouter)
 app.get('/healthz', (req, res) => {
   res.send('OK')
 })

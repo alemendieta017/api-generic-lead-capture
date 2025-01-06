@@ -1,4 +1,5 @@
-import Joi, { Schema } from 'joi'
+import Joi, { Schema, CustomHelpers } from 'joi'
+import { Types } from 'mongoose'
 
 const createLeadSchema: Schema = Joi.object({
   firstName: Joi.string().required(),
@@ -25,12 +26,19 @@ const getLeadsQuerySchema: Schema = Joi.object({
   dateTo: Joi.date().iso()
 })
 
+const objectIdValidation = (value: string, helpers: CustomHelpers) => {
+  if (!Types.ObjectId.isValid(value)) {
+    return helpers.message({ custom: 'Invalid ObjectId' })
+  }
+  return value
+}
+
 const getLeadSchema: Schema = Joi.object({
-  id: Joi.string().min(5).required()
+  id: Joi.string().custom(objectIdValidation).required()
 })
 
 const deleteLeadSchema: Schema = Joi.object({
-  id: Joi.string().min(5).required()
+  id: Joi.string().custom(objectIdValidation).required()
 })
 
 export {

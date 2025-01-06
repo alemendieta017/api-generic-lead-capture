@@ -27,11 +27,20 @@ class LeadsService {
     return result
   }
 
-  updateLead(id: string, leadData: ILead) {
+  async updateLead(id: string, leadData: ILead) {
+    const leadExists = await this.leadsRepository.findLeadById(id)
+    if (!leadExists) {
+      throw CustomError.notFound('Lead not found')
+    }
     return this.leadsRepository.updateLead(id, leadData)
   }
 
   deleteLead(id: string) {
+    const leadExists = this.leadsRepository.findLeadById(id)
+    if (!leadExists) {
+      throw CustomError.notFound('Lead not found')
+    }
+
     return this.leadsRepository.deleteLead(id)
   }
 

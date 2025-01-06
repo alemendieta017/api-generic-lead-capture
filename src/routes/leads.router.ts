@@ -7,7 +7,7 @@ import {
   getLeadsQuerySchema,
   getLeadSchema,
   deleteLeadSchema
-} from '../components/schemas/leads.schema'
+} from '../schemas/leads.schema'
 
 const router = Router()
 const leadsController = new LeadsController()
@@ -30,6 +30,7 @@ router.get(
 )
 router.put(
   '/:id',
+  new ValidatorMiddleware(getLeadSchema, 'params').handle,
   new ValidatorMiddleware(updateLeadSchema, 'body').handle,
   leadsController.updateLead
 )
