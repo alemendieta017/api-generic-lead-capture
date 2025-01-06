@@ -1,6 +1,6 @@
 interface IUser {
   email: string
-  password: string,
+  password: string
   createdAt?: Date
 }
 

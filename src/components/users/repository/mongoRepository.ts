@@ -20,7 +20,7 @@ class MongoRepository {
     return User.find(filter)
       .skip(offset)
       .limit(limit)
-      .select(['_id', 'email', "createdAt"])
+      .select(['_id', 'email', 'createdAt'])
       .exec()
   }
 
