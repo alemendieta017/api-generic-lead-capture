@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express'
 import logger from 'morgan'
+import cors from 'cors'
 import leadsRouter from './routes/leads.router'
 import usersRouter from './routes/users.router'
 import { ErrorMiddleware } from './middlewares/error.middleware'
@@ -15,6 +16,7 @@ connectDB(config.MONGODB_CONNECTION_STRING)
 
 app.use(logger('dev'))
 app.use(express.json())
+app.use(cors())
 
 app.use('/leads', leadsRouter)
 app.use('/users', usersRouter)

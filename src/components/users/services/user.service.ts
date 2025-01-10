@@ -18,7 +18,7 @@ class UserService {
       throw new CustomError(400, 'Invalid password')
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, {
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET as string, {
       expiresIn: '15m'
     })
 
@@ -63,7 +63,12 @@ class UserService {
       throw new CustomError(404, 'User not found')
     }
 
-    return this.userRepository.updateUser(id, user)
+    const updatedUser = await this.userRepository.updateUser(id, user)
+
+    return {
+      _id: updatedUser?._id,
+      email: updatedUser?.email
+    }
   }
 
   async deleteUser(id: string) {
