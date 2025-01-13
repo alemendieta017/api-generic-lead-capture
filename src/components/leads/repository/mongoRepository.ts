@@ -13,6 +13,12 @@ class MongoRepository {
     const offset = query.offset ?? 0
     const limit = query.limit ?? 10
     const filter: FilterQuery<ILead> = {}
+    if (query.firstName) {
+      filter.firstName = { $regex: query.firstName, $options: 'i' }
+    }
+    if (query.lastName) {
+      filter.lastName = { $regex: query.lastName, $options: 'i' }
+    }
     if (query.email) {
       filter.email = { $regex: query.email, $options: 'i' }
     }

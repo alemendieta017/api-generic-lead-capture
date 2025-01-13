@@ -7,6 +7,8 @@ interface ILead {
 }
 
 interface findAllLeadsQuery {
+  firstName?: string
+  lastName?: string
   email?: string
   dateFrom?: string
   dateTo?: string
