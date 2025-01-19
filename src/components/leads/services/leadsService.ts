@@ -44,8 +44,8 @@ class LeadsService {
     return this.leadsRepository.deleteLead(id)
   }
 
-  countLeads() {
-    return this.leadsRepository.countLeads()
+  countLeads(query: findAllLeadsQuery): Promise<number> {
+    return this.leadsRepository.countLeads(query)
   }
 }
 

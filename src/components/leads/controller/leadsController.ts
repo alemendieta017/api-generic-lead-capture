@@ -59,7 +59,8 @@ class LeadsController {
 
   async countLeads(req: Request, res: Response, next: NextFunction) {
     try {
-      const count = await leadsService.countLeads()
+      const query = req.query
+      const count = await leadsService.countLeads(query)
       res.status(200).json({ count })
     } catch (error) {
       next(error)

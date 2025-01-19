@@ -45,8 +45,24 @@ class MongoRepository {
     return result !== null
   }
 
-  async countLeads(): Promise<number> {
-    return Lead.countDocuments().exec()
+  async countLeads(query: findAllLeadsQuery): Promise<number> {
+    const filter: FilterQuery<ILead> = {}
+    if (query.firstName) {
+      filter.firstName = { $regex: query.firstName, $options: 'i' }
+    }
+    if (query.lastName) {
+      filter.lastName = { $regex: query.lastName, $options: 'i' }
+    }
+    if (query.email) {
+      filter.email = { $regex: query.email, $options: 'i' }
+    }
+    if (query.dateFrom) {
+      filter.createdAt = { ...filter.createdAt, $gte: new Date(query.dateFrom) }
+    }
+    if (query.dateTo) {
+      filter.createdAt = { ...filter.createdAt, $lte: new Date(query.dateTo) }
+    }
+    return Lead.countDocuments(filter).exec()
   }
 }
 

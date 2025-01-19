@@ -24,7 +24,12 @@ router.get(
   new ValidatorMiddleware(getLeadsQuerySchema, 'query').handle,
   leadsController.getLeads
 )
-router.get('/count', new AuthMiddleware().handle, leadsController.countLeads)
+router.get(
+  '/count',
+  new AuthMiddleware().handle,
+  new ValidatorMiddleware(getLeadsQuerySchema, 'query').handle,
+  leadsController.countLeads
+)
 router.get(
   '/:id',
   new AuthMiddleware().handle,
