@@ -18,9 +18,13 @@ class UserService {
       throw new CustomError(400, 'Invalid password')
     }
 
-    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET as string, {
-      expiresIn: '15m'
-    })
+    const token = jwt.sign(
+      { sub: user._id },
+      process.env.JWT_SECRET as string,
+      {
+        expiresIn: '15m'
+      }
+    )
 
     return {
       token
@@ -53,6 +57,8 @@ class UserService {
     return {
       _id: user._id,
       email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
       createdAt: user.createdAt
     }
   }
@@ -67,7 +73,10 @@ class UserService {
 
     return {
       _id: updatedUser?._id,
-      email: updatedUser?.email
+      firstName: updatedUser?.firstName,
+      lastName: updatedUser?.lastName,
+      email: updatedUser?.email,
+      createdAt: updatedUser?.createdAt
     }
   }
 

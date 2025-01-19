@@ -17,15 +17,17 @@ class MongoRepository {
       filter.email = { $regex: query.email, $options: 'i' }
     }
 
+    const selectArray = ['_id', 'email', 'firstName', 'lastName', 'createdAt']
     return User.find(filter)
       .skip(offset)
       .limit(limit)
-      .select(['_id', 'email', 'createdAt'])
+      .select(selectArray)
       .exec()
   }
 
   async findUserById(id: string) {
-    return User.findById(id).exec()
+    const selectArray = ['_id', 'email', 'firstName', 'lastName', 'createdAt']
+    return User.findById(id).select(selectArray).exec()
   }
 
   async updateUser(id: string, userData: IUser) {
